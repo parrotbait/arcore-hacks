@@ -15,8 +15,8 @@ Works on Google Pixel running 8.0 on 14/12/2017.
 
 ## Hacks in detail
 
-* Added TangoWrapperCustom.java. This allows me to image callbacks. Being at the same package level allows me to get to ITango which is what the mTango implements in the Session class.
-* SessionHack.java. This is designed to be at the same level and provide public access to the TangoCameraIntrinsics class
+* Added `TangoWrapperCustom.java`. This allows me to receive image callbacks from Tango. Being at the same package level allows me to get to ITango which is what the mTango implements in the Session class.
+* SessionHack.java. This is designed to be at the same package level as Session and provide public access to the TangoCameraIntrinsics class
 * Use reflection to update mTango to TangoWrapperCustom
 
 ```
@@ -42,7 +42,7 @@ for (Field field : fields) {
 * Add listener to tango object. Looking at the decompiled Session object I can see it only adds listeners after the Tango object has correctly initialised. This happens in the resume of the Session object. So I put in a delay with an arbitrary value (5ms) to add my own listener:
 
 ```
-mTangoBinder.postDelayed(new Runnable() {
+mTangoBinder.post(new Runnable() {
     @Override
     public void run() {
         ArrayList<TangoCoordinateFramePair> framePairs = new ArrayList();
@@ -86,7 +86,7 @@ mTangoBinder.postDelayed(new Runnable() {
         };
         mTango.connectListener(framePairs, callback);
     }
-}, 5);
+});
 ```
 
 I don't know if this delay is actually really needed or not, can play around with it here.
