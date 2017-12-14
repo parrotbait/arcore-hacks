@@ -7,7 +7,7 @@ ARCore looks very nice but is missing some really obvious functionality in compa
 
 Using reflection I've done a few small(ish) hacks to get into the internal Tango objects and get the sort of information I need. I don't know why Google didn't just do this in the first place, it is pretty trivial for me to add these so the maintainers of the library could do pretty easily themselves I'm sure.
 
-To run, create a 'libraries' directory at the top level and place arcore_client.aar in this directory. Do a gradle sync and away you go.
+To run, create a 'arcore' directory at the top level and place arcore_client.aar in this directory. Do a gradle sync and away you go.
 
 WARNING: These are hacks, they are dangerous and should be used with extra caution. The use of reflection to access internal types means that if/when the library, interfaces or implementation changes this app will become non-functional
 
